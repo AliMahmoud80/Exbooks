@@ -20258,10 +20258,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-/* provided dependency */ var process = __webpack_require__(/*! process/browser */ "./node_modules/process/browser.js");
 
 (axios__WEBPACK_IMPORTED_MODULE_0___default().defaults.withCredentials) = true;
-(axios__WEBPACK_IMPORTED_MODULE_0___default().defaults.baseURL) = process.env.VUE_APP_SERVER_HOST + '/api'; // fetch CSRF cookie.
+(axios__WEBPACK_IMPORTED_MODULE_0___default().defaults.baseURL) = '/api'; // fetch CSRF cookie.
 
 axios__WEBPACK_IMPORTED_MODULE_0___default().get('/csrf-cookie');
 

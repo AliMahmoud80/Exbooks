@@ -13,7 +13,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm-bundler.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_1__);
-/* provided dependency */ var process = __webpack_require__(/*! process/browser */ "./node_modules/process/browser.js");
 
 
 
@@ -22,7 +21,6 @@ __webpack_require__.r(__webpack_exports__);
   setup: function setup() {
     var route = (0,vue_router__WEBPACK_IMPORTED_MODULE_2__.useRoute)();
     var store = (0,vuex__WEBPACK_IMPORTED_MODULE_3__.useStore)();
-    var HOST = process.env.VUE_APP_SERVER_HOST;
     var exchange = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)();
     store.dispatch('exchange/fetch', route.params.id).then(function (res) {
       exchange.value = res.data.data;
@@ -32,8 +30,7 @@ __webpack_require__.r(__webpack_exports__);
     });
     return {
       exchange: exchange,
-      getDate: getDate,
-      HOST: HOST
+      getDate: getDate
     };
   }
 });
@@ -154,7 +151,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_3__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_3__.createElementBlock)("img", {
       "class": "w-full max-w-[500px] h-full mb-4",
       key: i,
-      src: $setup.HOST + '/storage/' + img.path
+      src: '/storage/' + img.path
     }, null, 8
     /* PROPS */
     , _hoisted_15);

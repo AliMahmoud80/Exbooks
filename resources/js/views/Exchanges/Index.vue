@@ -84,7 +84,7 @@
           class="w-full max-w-[500px] h-full mb-4"
           v-for="(img, i) in exchange.previews"
           :key="i"
-          :src="HOST + '/storage/' + img.path"
+          :src="'/storage/' + img.path"
         />
       </div>
     </div>
@@ -105,8 +105,6 @@ export default {
     const route = useRoute()
     const store = useStore()
 
-    const HOST = process.env.VUE_APP_SERVER_HOST
-
     const exchange = ref()
 
     store.dispatch('exchange/fetch', route.params.id).then((res) => {
@@ -120,7 +118,6 @@ export default {
     return {
       exchange,
       getDate,
-      HOST,
     }
   },
 }
