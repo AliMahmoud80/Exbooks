@@ -1,0 +1,75 @@
+<template>
+  <div class="container mx-auto p-5 md:p-0">
+    <div class="mt-3 md:mt-24 w-ful md:w-[28rem] mx-auto flex flex-col">
+      <div v-if="editMode" class="flex flex-col">
+        <input-default
+          class="text-center mb-3"
+          v-model="user.name"
+          placeholder="Name"
+        />
+        <input-default
+          class="text-center mb-3"
+          v-model="user.email"
+          placeholder="Email"
+        />
+        <input-default
+          class="text-center mb-3"
+          v-model="user.phone_number"
+          placeholder="Phone Number"
+        />
+        <input-default
+          class="text-center mb-3"
+          v-model="user.password"
+          placeholder="Password"
+        />
+        <input-default
+          class="text-center mb-3"
+          v-model="user.password_confirmation"
+          placeholder="Confirm Password"
+        />
+      </div>
+      <div v-else class="w-full flex flex-col items-center justify-center">
+        <p class="font-bold mb-1">{{ $store.getters.user.name }}</p>
+        <p class="font-bold mb-1">{{ $store.getters.user.email }}</p>
+        <p class="font-bold mb-1">{{ $store.getters.user.phone_number }}</p>
+        <button-default
+          text="Edit"
+          class="self-end w-full mt-5"
+          @click="editMode = true"
+        />
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import { ref, reactive } from 'vue'
+import { useStore } from 'vuex'
+import InputDefault from '@/components/InputDefault'
+import ButtonDefault from '@/components/ButtonDefault'
+
+export default {
+  components: { InputDefault, ButtonDefault },
+
+  setup() {
+    const store = useStore()
+
+    const user = reactive({
+      name: store.getters.user.name,
+      email: store.getters.user.email,
+      phone_number: store.getters.user.phone_number,
+      password: '',
+      password_confirmation: '',
+    })
+
+    const editMode = ref(false)
+
+    return {
+      user,
+      editMode,
+    }
+  },
+}
+</script>
+
+<style></style>
