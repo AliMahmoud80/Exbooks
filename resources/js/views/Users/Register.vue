@@ -42,7 +42,11 @@
         "
         type="password"
       ></input-default>
-      <button-default class="mt-1" text="Register"></button-default>
+      <button-default
+        :disabled="disabledButton"
+        class="mt-1"
+        text="Register"
+      ></button-default>
     </form>
   </div>
 </template>
@@ -67,6 +71,7 @@ export default {
   setup() {
     const store = useStore()
 
+    const disabledButton = ref(false)
     const name = ref('')
     const email = ref('')
     const phone_number = ref('')
@@ -117,6 +122,8 @@ export default {
         return
       }
 
+      disabledButton.value = true
+
       store
         .dispatch('register', {
           name: name.value,
@@ -138,6 +145,7 @@ export default {
           if (e.response) {
             serverValidationErrors.value = e.response.data.errors
           }
+          disabledButton.value = false
         })
     }
 
@@ -150,6 +158,7 @@ export default {
       v$,
       serverValidationErrors,
       register,
+      disabledButton,
     }
   },
 }

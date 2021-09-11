@@ -18,7 +18,11 @@
         :clientValidationErrors="v$.password.$errors"
         :serverValidationErrors="serverValidationErrors['password']"
       ></input-default>
-      <button-default class="mt-1" text="login"></button-default>
+      <button-default
+        :disabled="disabledButton"
+        class="mt-1"
+        text="login"
+      ></button-default>
     </form>
   </div>
 </template>
@@ -42,6 +46,7 @@ export default {
   setup() {
     const store = useStore()
 
+    const disabledButton = ref(false)
     const email = ref('')
     const password = ref('')
 
@@ -69,6 +74,8 @@ export default {
         return
       }
 
+      disabledButton.value = true
+
       store
         .dispatch('login', {
           email: email.value,
@@ -85,6 +92,7 @@ export default {
         })
         .catch((e) => {
           serverValidationErrors.value = e.response.data.errors
+          disabledButton.value = true
         })
     }
 
@@ -94,6 +102,7 @@ export default {
       v$,
       serverValidationErrors,
       login,
+      disabledButton,
     }
   },
 }

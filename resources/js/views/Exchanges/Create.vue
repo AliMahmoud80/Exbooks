@@ -100,6 +100,7 @@
       class="mt-5 float-right w-40"
       text="Add"
       @click="create"
+      :disabled="disabledButton"
     ></button-default>
   </div>
 </template>
@@ -144,6 +145,8 @@ export default {
     const store = useStore()
     const router = useRouter()
     const serverValidationErrors = ref([])
+
+    const disabledButton = ref(false)
 
     const ownedBooks = reactive([{ name: '' }])
     const wantedBooks = reactive([{ name: '' }])
@@ -242,6 +245,8 @@ export default {
 
       const previewImgs = filePond.value.getFiles()
 
+      disabledButton.value = true
+
       store
         .dispatch('exchange/create', {
           ownedBooks: ownedBooks,
@@ -257,6 +262,7 @@ export default {
         })
         .catch((e) => {
           serverValidationErrors.value = e.response.data.errors
+          disabledButton.value = false
         })
     }
 
@@ -274,6 +280,7 @@ export default {
       selectedCity,
       create,
       serverValidationErrors,
+      disabledButton,
     }
   },
 }

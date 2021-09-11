@@ -2095,6 +2095,7 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_4___default()(filepond_plug
     var store = (0,vuex__WEBPACK_IMPORTED_MODULE_13__.useStore)();
     var router = (0,vue_router__WEBPACK_IMPORTED_MODULE_14__.useRouter)();
     var serverValidationErrors = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)([]);
+    var disabledButton = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)(false);
     var ownedBooks = (0,vue__WEBPACK_IMPORTED_MODULE_2__.reactive)([{
       name: ''
     }]);
@@ -2194,6 +2195,7 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_4___default()(filepond_plug
       v$.value.$touch();
       if (v$.value.$invalid === true) return;
       var previewImgs = filePond.value.getFiles();
+      disabledButton.value = true;
       store.dispatch('exchange/create', {
         ownedBooks: ownedBooks,
         wantedBooks: wantedBooks,
@@ -2206,6 +2208,7 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_4___default()(filepond_plug
         router.push('/exchange/' + id);
       })["catch"](function (e) {
         serverValidationErrors.value = e.response.data.errors;
+        disabledButton.value = false;
       });
     };
 
@@ -2222,7 +2225,8 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_4___default()(filepond_plug
       selectedCountry: selectedCountry,
       selectedCity: selectedCity,
       create: create,
-      serverValidationErrors: serverValidationErrors
+      serverValidationErrors: serverValidationErrors,
+      disabledButton: disabledButton
     };
   }
 });
@@ -2521,10 +2525,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , ["options", "modelValue"])]), (0,vue__WEBPACK_IMPORTED_MODULE_3__.createVNode)(_component_button_default, {
     "class": "mt-5 float-right w-40",
     text: "Add",
-    onClick: $setup.create
+    onClick: $setup.create,
+    disabled: $setup.disabledButton
   }, null, 8
   /* PROPS */
-  , ["onClick"])]);
+  , ["onClick", "disabled"])]);
 }
 
 /***/ }),

@@ -2046,6 +2046,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   setup: function setup() {
     var store = (0,vuex__WEBPACK_IMPORTED_MODULE_6__.useStore)();
+    var disabledButton = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)(false);
     var name = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)('');
     var email = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)('');
     var phone_number = (0,vue__WEBPACK_IMPORTED_MODULE_2__.ref)('');
@@ -2095,6 +2096,7 @@ __webpack_require__.r(__webpack_exports__);
         return;
       }
 
+      disabledButton.value = true;
       store.dispatch('register', {
         name: name.value,
         email: email.value,
@@ -2126,6 +2128,8 @@ __webpack_require__.r(__webpack_exports__);
         if (e.response) {
           serverValidationErrors.value = e.response.data.errors;
         }
+
+        disabledButton.value = false;
       });
     };
 
@@ -2137,7 +2141,8 @@ __webpack_require__.r(__webpack_exports__);
       password_confirmation: password_confirmation,
       v$: v$,
       serverValidationErrors: serverValidationErrors,
-      register: register
+      register: register,
+      disabledButton: disabledButton
     };
   }
 });
@@ -2258,9 +2263,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 8
   /* PROPS */
   , ["modelValue", "clientValidationErrors", "serverValidationErrors"]), (0,vue__WEBPACK_IMPORTED_MODULE_1__.createVNode)(_component_button_default, {
+    disabled: $setup.disabledButton,
     "class": "mt-1",
     text: "Register"
-  })], 32
+  }, null, 8
+  /* PROPS */
+  , ["disabled"])], 32
   /* HYDRATE_EVENTS */
   )]);
 }
