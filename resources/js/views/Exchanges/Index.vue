@@ -84,7 +84,7 @@
           class="w-full max-w-[500px] h-full mb-4"
           v-for="(img, i) in exchange.previews"
           :key="i"
-          :src="'/storage/' + img.path"
+          :src="'data:image/png;base64,' + img.image"
         />
       </div>
     </div>

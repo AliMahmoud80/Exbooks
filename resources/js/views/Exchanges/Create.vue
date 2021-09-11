@@ -75,14 +75,15 @@
       placeholder="Additional Description [optional]"
       v-model="description"
     ></textarea-default>
-    <div class="flex justify-center mt-5">
+    <div class="flex flex-col items-center justify-center mt-5">
       <file-pond
         class="w-full lg:w-1/2"
         ref="filePond"
         class-name="filepond"
-        label-idle="Upload preview images"
+        label-idle="Upload preview images (Maximum 5 Images)"
         allow-multiple="true"
         accepted-file-types="image/jpeg, image/png"
+        maxFiles="5"
       />
     </div>
     <div class="flex justify-between mt-5 gap-5 md:gap-36">

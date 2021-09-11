@@ -26,7 +26,8 @@ class ExchangeResource extends JsonResource
             'wantedBooks' => Book::where('exchange_id', $this->id)->where('status', 'wanted')->get(),
             'ownedBooks' => Book::where('exchange_id', $this->id)->where('status', 'owned')->get(),
             'description' => isset($this->description) ? $this->description : null,
-            'previews' => Preview::where('exchange_id', $this->id)->get(),
+            // Previews hidden when fetching all exchanges on home page.
+            'previews' => $this->when(!(\str_ends_with($request->url(), '/api/exchange')), Preview::where('exchange_id', $this->id)->get()),
             'city' => City::find($this->city_id)['name'],
             'country' => Country::find($this->country_id)['name'],
             'date' => new Carbon($this->created_at)

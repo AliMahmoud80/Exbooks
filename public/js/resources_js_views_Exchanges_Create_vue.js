@@ -2418,7 +2418,7 @@ var _hoisted_16 = {
   "class": "flex flex-col self-center gap-2 w-full"
 };
 var _hoisted_17 = {
-  "class": "flex justify-center mt-5"
+  "class": "flex flex-col items-center justify-center mt-5"
 };
 var _hoisted_18 = {
   "class": "flex justify-between mt-5 gap-5 md:gap-36"
@@ -2496,9 +2496,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "w-full lg:w-1/2",
     ref: "filePond",
     "class-name": "filepond",
-    "label-idle": "Upload preview images",
+    "label-idle": "Upload preview images (Maximum 5 Images)",
     "allow-multiple": "true",
-    "accepted-file-types": "image/jpeg, image/png"
+    "accepted-file-types": "image/jpeg, image/png",
+    maxFiles: "5"
   }, null, 512
   /* NEED_PATCH */
   )]), (0,vue__WEBPACK_IMPORTED_MODULE_3__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_3__.createVNode)(_component_select_default, {

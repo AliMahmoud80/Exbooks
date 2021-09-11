@@ -10,7 +10,7 @@ class Preview extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['exchange_id', 'path'];
+    protected $fillable = ['exchange_id', 'image'];
 
     public function exchange()
     {

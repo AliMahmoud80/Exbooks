@@ -151,7 +151,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_3__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_3__.createElementBlock)("img", {
       "class": "w-full max-w-[500px] h-full mb-4",
       key: i,
-      src: '/storage/' + img.path
+      src: 'data:image/png;base64,' + img.image
     }, null, 8
     /* PROPS */
     , _hoisted_15);

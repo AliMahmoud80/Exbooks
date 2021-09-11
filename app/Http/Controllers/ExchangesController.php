@@ -44,7 +44,8 @@ class ExchangesController extends Controller
   {
     $valid = $request->validate([
       'data' => 'required|json',
-      'preview[].*' => 'image|mimes:jpg,jpeg,png'
+      'preview[].*' => 'image|mimes:jpg,jpeg,png',
+      'preview' => 'max:5'
     ]);
 
     if ($valid) {
@@ -82,15 +83,12 @@ class ExchangesController extends Controller
           $preview_imgs = $request->file('preview');
 
           foreach ($preview_imgs as $img) {
+            $img_content = base64_encode(file_get_contents($img));
 
-            $stored_img = $img->storePublicly('public/previews');
-
-            if ($stored_img) {
-              Preview::create([
-                'exchange_id' => $exchange->id,
-                'path' => str_replace('public/', '', $stored_img),
-              ]);
-            }
+            $img = Preview::create([
+              'exchange_id' => $exchange->id,
+              'image' => $img_content,
+            ]);
           }
         }
 

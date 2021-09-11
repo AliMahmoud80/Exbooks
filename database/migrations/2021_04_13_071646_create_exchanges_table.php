@@ -15,7 +15,7 @@ class CreateExchangesTable extends Migration
     {
         Schema::create('exchanges', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->references('id')->on('users');
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->mediumText('description')->nullable();
             $table->foreignId('country_id')->references('id')->on('countries');
             $table->foreignId('city_id')->references('id')->on('cities');
