@@ -10,6 +10,14 @@ const store = createStore({
     exchange: exchangeModule,
     location: locationModule,
   },
+  state: {
+    loading: false,
+  },
+  mutations: {
+    setLoading(state, value) {
+      state.loading = value
+    },
+  },
 })
 
 export default store

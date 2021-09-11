@@ -89,7 +89,10 @@
       </div>
     </div>
   </div>
-  <div v-else class="container m-auto p-5 md:p-0 font-bold text-center">
+  <div
+    v-else-if="notFound"
+    class="container m-auto p-5 md:p-0 font-bold text-center"
+  >
     Not Found
   </div>
 </template>
@@ -106,10 +109,19 @@ export default {
     const store = useStore()
 
     const exchange = ref()
+    const notFound = ref(false)
 
-    store.dispatch('exchange/fetch', route.params.id).then((res) => {
-      exchange.value = res.data.data
-    })
+    store.commit('setLoading', true)
+    store
+      .dispatch('exchange/fetch', route.params.id)
+      .then((res) => {
+        exchange.value = res.data.data
+        store.commit('setLoading', false)
+      })
+      .catch(() => {
+        notFound.value = true
+        store.commit('setLoading', false)
+      })
 
     const getDate = computed(() => {
       return moment(exchange.value.date).fromNow()
@@ -118,6 +130,7 @@ export default {
     return {
       exchange,
       getDate,
+      notFound,
     }
   },
 }

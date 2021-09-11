@@ -62,7 +62,11 @@ export default {
     })
 
     onMounted(() => {
-      store.dispatch('exchange/fetchAll', 1)
+      store.commit('setLoading', true)
+
+      store.dispatch('exchange/fetchAll', 1).then(() => {
+        store.commit('setLoading', false)
+      })
     })
 
     const updatePage = (page) => {

@@ -22,15 +22,22 @@ __webpack_require__.r(__webpack_exports__);
     var route = (0,vue_router__WEBPACK_IMPORTED_MODULE_2__.useRoute)();
     var store = (0,vuex__WEBPACK_IMPORTED_MODULE_3__.useStore)();
     var exchange = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)();
+    var notFound = (0,vue__WEBPACK_IMPORTED_MODULE_0__.ref)(false);
+    store.commit('setLoading', true);
     store.dispatch('exchange/fetch', route.params.id).then(function (res) {
       exchange.value = res.data.data;
+      store.commit('setLoading', false);
+    })["catch"](function () {
+      notFound.value = true;
+      store.commit('setLoading', false);
     });
     var getDate = (0,vue__WEBPACK_IMPORTED_MODULE_0__.computed)(function () {
       return moment__WEBPACK_IMPORTED_MODULE_1___default()(exchange.value.date).fromNow();
     });
     return {
       exchange: exchange,
-      getDate: getDate
+      getDate: getDate,
+      notFound: notFound
     };
   }
 });
@@ -157,7 +164,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , _hoisted_15);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_3__.createCommentVNode)("v-if", true)])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_3__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_3__.createElementBlock)("div", _hoisted_16, " Not Found "));
+  ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_3__.createCommentVNode)("v-if", true)])])) : $setup.notFound ? ((0,vue__WEBPACK_IMPORTED_MODULE_3__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_3__.createElementBlock)("div", _hoisted_16, " Not Found ")) : (0,vue__WEBPACK_IMPORTED_MODULE_3__.createCommentVNode)("v-if", true);
 }
 
 /***/ }),
